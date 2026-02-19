@@ -8,16 +8,22 @@
 </head>
 <body>
     <header>
-    <h1> Fitness Tracking</h1> </header>
+    <h1> Fitness Tracking</h1>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+ </header>
    <div class="navigation">
+  
     <ul>
-        <li class="active"><a href="#"><span class="icon">🏠</span><span class="text">Home</span></a></li>
-        <li><a href="#"><span class="icon">🏋️</span><span class="text">Workout</span></a></li>
-        <li><a href="#"><span class="icon">🔥</span><span class="text">Calories</span></a></li>
-        <li><a href="#"><span class="icon">📊</span><span class="text">Progress</span></a></li>
-        <li><a href="#"><span class="icon">👤</span><span class="text">Profile</span></a></li>
-        <div class="indicator"></div>
-    </ul>
+
+<li class="active"><a href="#"><span class="icon">🏠</span><span class="text">Home</span></a></li>
+<li><a href="workout.html"><span class="icon">🏋</span><span class="text">Workout</span></a></li>
+<li><a href="calories.html"><span class="icon">🔥</span><span class="text">Calories</span></a></li>
+<li><a href="#"><span class="icon">📊</span><span class="text">Progress</span></a></li>
+
+<li><a href="#"><span class="icon">👤</span><span class="text">Profile</span></a></li>
+
+<div class="indicator"></div>
+</ul>
     </div>
    
 
@@ -42,47 +48,7 @@
                 </div>
             </div>
         </section>
-        <section class="card">
-            <h2>Calorie Tracker</h2>
-            <form>
-                <label>Select food</label>
-                <select id="foodSelect" onchange="setCalories()">
-    <option value="">Choose Food Items</option>
-
-    <option data-cal="200">Rice (1 bowl)</option>
-    <option data-cal="120">Roti</option>
-    <option data-cal="180">Dal (1 bowl)</option>
-    <option data-cal="220">Paneer Curry (1 bowl)</option>
-    <option data-cal="250">Chicken Curry (100g)</option>
-    <option data-cal="150">Samosa</option>
-    <option data-cal="300">Veg Biryani (1 plate)</option>
-    <option data-cal="350">Chicken Biryani (1 plate)</option>
-    <option data-cal="90">Idli (1 piece)</option>
-    <option data-cal="180">Dosa (plain)</option>
-
-    <option data-cal="78">Boiled Egg</option>
-    <option data-cal="150">Milk (1 glass)</option>
-    <option data-cal="105">Banana</option>
-    <option data-cal="95">Apple</option>
-    <option data-cal="250">Bread Butter (2 slices)</option>
-    <option data-cal="310">Maggi (1 bowl)</option>
-    <option data-cal="220">Poha (1 plate)</option>
-    <option data-cal="270">Upma (1 plate)</option>
-
-    <option data-cal="285">Pizza Slice</option>
-    <option data-cal="320">Burger</option>
-    <option data-cal="365">French Fries (medium)</option>
-    <option data-cal="210">Sandwich (veg)</option>
-
-    <option data-cal="160">Oats (1 bowl)</option>
-    <option data-cal="120">Salad Bowl</option>
-    <option data-cal="170">Peanut Butter (2 tbsp)</option>
-</select>
-<label>Calories</label>
-<input type="number" id="calories" placeholder="in Kcal" readonly>
-<button type="submit">Add food Items</button>
-            </form>
-        </section>
+      
   
 
 <section class="card">

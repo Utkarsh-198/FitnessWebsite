@@ -14,7 +14,8 @@ body{
 header{
     background: #1f2d3d;
     color:white;
-    padding:16px 30px;
+    padding:30px 30px;
+
 }
 
 nav{
@@ -35,14 +36,14 @@ nav a:hover{
 }
 
 .container{
-    padding:30px;
+    padding:35px;
 }
 
 .card{
     background:white;
-    padding:22px;
+    padding:21px;
     margin-bottom:22px;
-    border-radius:14px;
+    border-radius:1px;
     box-shadow:0 6px 18px rgba(0,0,0,0.06);
 }
 
@@ -74,6 +75,19 @@ button{
     cursor:pointer;
     font-weight:600;
 }
+.delete-btn{
+    padding:4px 16px;
+    font-size:13px;
+    border-radius:14px;
+    width:auto;            
+    background:#17a2b8;
+    color:white;
+}
+
+.delete-btn:hover{
+    background:#007bff;
+}
+td{padding: 5px;}
 
 button:hover{
     opacity:0.9;
@@ -145,9 +159,35 @@ footer{
     transition:0.5s;
 }
 
-.navigation ul li.active a .text{
+.navigation ul li a{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+/* tooltip text */
+.navigation ul li a .text{
+    position:absolute;
+    bottom:-28px;
+    left:50%;
+    transform:translateX(-50%) translateY(-140%);
+    background:#1f2d3d;
+    color:white;
+    padding:4px 10px;
+    border-radius:6px;
+    font-size:12px;
+    opacity:0;
+    pointer-events:none;
+    transition:0.3s;
+    white-space:nowrap;
+}
+
+
+.navigation ul li:hover a .text{
     opacity:1;
-    transform:translateY(10px);
+    bottom:-36px;
 }
 
 /* moving circle */
@@ -161,6 +201,24 @@ footer{
     border:6px solid #eef3f8;
     transition:0.5s;
 }
+/*logout button*/
+.logout-btn{
+    float:right;
+    padding:6px 14px;
+    margin-left:29px;
+    margin-top: -15px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(135deg,#ff5f6d,#ff2e63);
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.logout-btn:hover{
+    opacity:0.9;
+}
+
 
 /* positions for each menu item */
 .navigation ul li:nth-child(1).active ~ .indicator{ transform:translateX(calc(70px * 0)); }

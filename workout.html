@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workout Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Workout Tracker</h1><br>
+    <a href="main.html"><button>⬅ Back to Dashboard</button></a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+<section class="card">
+
+<h2>Workout</h2>
+
+<form id="workoutForm">
+
+<select id="workoutSelect">
+<option value="">--Choose Workout--</option>
+<option data-cal="8">Walking</option>
+<option data-cal="10">Running</option>
+<option data-cal="7">Cycling</option>
+<option data-cal="6">Yoga</option>
+<option data-cal="9">Skipping</option>
+<option data-cal="5">Pushups</option>
+<option data-cal="6">Gym Workout</option>
+</select>
+
+<label>Duration (minutes)</label>
+<input type="number" id="minutes" placeholder="Enter minutes">
+
+<button type="submit">Add Workout</button><br>
+
+</form>
+<br>
+<h3>Today's Workouts</h3><br>
+
+<table id="workoutTable" border="2" style="width:100%;margin-top:10px;border-collapse:collapse;">
+<thead>
+<tr>
+<th>Workout</th>
+<th>Minutes</th>
+<th>Calories Burned</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<br>
+
+<h2 style="color:#17a2b8; ;">Total Burned: <span id="totalBurned">0</span> kcal</h2>
+
+</section>
+
+</div>
+
+<script>
+
+let totalBurned=0;
+
+document.getElementById("workoutForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const s=document.getElementById("workoutSelect");
+const workout=s.options[s.selectedIndex].text;
+const rate=parseInt(s.options[s.selectedIndex].getAttribute("data-cal"));
+const minutes=parseInt(document.getElementById("minutes").value);
+
+if(!rate || !minutes){
+alert("Select workout and minutes");
+return;
+}
+
+const burned=rate*minutes;
+
+const tbody=document.querySelector("#workoutTable tbody");
+const row=tbody.insertRow();
+
+row.insertCell(0).innerText=workout;
+row.insertCell(1).innerText=minutes;
+row.insertCell(2).innerText=burned+" kcal";
+
+const del=row.insertCell(3);
+const btn=document.createElement("button");
+btn.innerText="Delete";
+btn.className="delete-btn";
+btn.onclick=function(){
+totalBurned-=burned;
+document.getElementById("totalBurned").innerText=totalBurned;
+row.remove();
+};
+del.appendChild(btn);
+
+totalBurned+=burned;
+document.getElementById("totalBurned").innerText=totalBurned;
+
+this.reset();
+
+});
+function logout(){
+    sessionStorage.removeItem("loggedIn");
+    window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>

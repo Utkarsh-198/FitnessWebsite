@@ -1,30 +1,9 @@
-function setCalories(){
-    const select = document.getElementById("foodSelect");
-    const selectedOption = select.options[select.selectedIndex];
-    const cal = selectedOption.getAttribute("data-cal");
-    document.getElementById("calories").value = cal || "";
+// login 
+if(sessionStorage.getItem("loggedIn") !== "true"){
+    window.location.href = "login.html";
 }
 
-document.addEventListener("DOMContentLoaded", function(){
 
-    const form = document.querySelector("form");
-
-    form.addEventListener("submit", function(e){
-        e.preventDefault();
-
-        const food = document.getElementById("foodSelect").value;
-        const cal = document.getElementById("calories").value;
-
-        if(!food){
-            alert("Please select a food item");
-            return;
-        }
-
-        alert("Food added: " + cal + " kcal");
-        form.reset();
-    });
-
-});
 
 //navigation
 const list = document.querySelectorAll('.navigation ul li');
