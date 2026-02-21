@@ -29,23 +29,42 @@
 
     <div class="container">
         <section class ="card">
-            <h2>Dashboard</h2>
+            <h2 style="text-align: center; padding:9px">Dashboard</h2>
             <div class="grid">
-                <div class="card">
+                <div class="block">
                     <h3>todays steps</h3>
+                    <button onclick="startTracking()">Start Tracking</button>
+                     <button onclick="stopTracking()">Stop</button> 
+                     <button onclick="resetSteps()">Reset</button>
                     <p id="steps">0</p>
+                    
+                   
+                         
 
                 </div>
-                <div class="card">
+                <div class="block">
                     <h3>Calories Burned</h3>
                     <p id="burned">0 kcal</p>
 
                 </div>
-                <div class="card">
-                    <h3>Water intake</h3>
-                    <p id="water">0 L</p>
+        
+    <div class="block">
 
-                </div>
+<h3>Water Intake</h3>
+
+<p id="waterText">0 / 8 glasses</p>
+
+<div style="background:#ddd;height:12px;border-radius:10px;margin-bottom:10px;">
+    <div id="waterBar"
+    style="height:12px;width:0%;
+    background:linear-gradient(135deg,#17a2b8,#00c6ff);
+    border-radius:10px;"></div>
+</div>
+
+<button onclick="addWater()">+1 Glass</button>
+<button onclick="resetWater()">Reset</button>
+
+</div>
             </div>
         </section>
       

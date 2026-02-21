@@ -40,13 +40,23 @@ nav a:hover{
 }
 
 .card{
+
     background:white;
     padding:21px;
     margin-bottom:22px;
     border-radius:1px;
     box-shadow:0 6px 18px rgba(0,0,0,0.06);
+    
 }
-
+.block{
+   background:linear-gradient(135deg,#007bff,#17a2b8);
+    padding:20px;
+    margin-bottom:22px;
+    border-radius:1px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+border-radius: 20px;
+box-shadow:5px 7px 19px #1f2d3d;
+}
 
 .grid{
     display:grid;

@@ -19,12 +19,20 @@
 
 <section class="card">
 
-<h2>Workout</h2>
+    <label>Set Daily Goal (kcal)</label>
+
+<div style="display:flex;gap:10px;margin-bottom:10px;">
+    <input type="number" id="goalInput" placeholder="Enter goal (e.g. 500)" min="100">
+    <button type="button" onclick="setGoal()">Set Goal</button>
+</div>
+
+<br>
+<h2>Log Workout</h2>
 
 <form id="workoutForm">
 
 <select id="workoutSelect">
-<option value="">--Choose Workout--</option>
+<option value="">Choose Workout </option>
 <option data-cal="8">Walking</option>
 <option data-cal="10">Running</option>
 <option data-cal="7">Cycling</option>
@@ -37,34 +45,65 @@
 <label>Duration (minutes)</label>
 <input type="number" id="minutes" placeholder="Enter minutes">
 
-<button type="submit">Add Workout</button><br>
+<label>Intensity</label>
+<select id="intensity">
+<option value="1">Easy</option>
+<option value="1.2">Moderate</option>
+<option value="1.5">Hard</option>
+</select>
+
+<button type="submit">Add Workout</button>
 
 </form>
-<br>
-<h3>Today's Workouts</h3><br>
+
+<h3>Today's Workouts</h3>
 
 <table id="workoutTable" border="2" style="width:100%;margin-top:10px;border-collapse:collapse;">
 <thead>
 <tr>
 <th>Workout</th>
 <th>Minutes</th>
-<th>Calories Burned</th>
+<th>Intensity</th>
+<th>Calories</th>
+<th>Time</th>
 <th>Action</th>
 </tr>
 </thead>
 <tbody></tbody>
 </table>
-<br>
 
-<h2 style="color:#17a2b8; ;">Total Burned: <span id="totalBurned">0</span> kcal</h2>
+<h2>Total Burned: <span id="totalBurned">0</span>kcal</h2>
+<br>
+<!-- progress bar -->
+<h3 id="goalText">Calories Burned: 0 / 0 kcal</h3>
+
+<div style="background:#ddd;height:14px;border-radius:10px;">
+    <div id="progressBar"
+    style="height:14px;width:0%;
+    background:linear-gradient(135deg,#007bff,#17a2b8);
+    border-radius:10px;"></div>
+</div>
+</div>
 
 </section>
 
 </div>
 
 <script>
-
 let totalBurned=0;
+let goal = 0;
+
+function setGoal(){
+    const val = parseInt(document.getElementById("goalInput").value);
+
+    if(!val || val<=0){
+        alert("Enter a valid goal");
+        return;
+    }
+
+    goal = val;
+    updateTotal();
+}
 
 document.getElementById("workoutForm").addEventListener("submit",function(e){
 
@@ -74,41 +113,70 @@ const s=document.getElementById("workoutSelect");
 const workout=s.options[s.selectedIndex].text;
 const rate=parseInt(s.options[s.selectedIndex].getAttribute("data-cal"));
 const minutes=parseInt(document.getElementById("minutes").value);
+const intensity=document.getElementById("intensity").value;
 
 if(!rate || !minutes){
 alert("Select workout and minutes");
 return;
 }
 
-const burned=rate*minutes;
+const burned=Math.round(rate*minutes*intensity);
+const now=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
 
 const tbody=document.querySelector("#workoutTable tbody");
 const row=tbody.insertRow();
 
 row.insertCell(0).innerText=workout;
 row.insertCell(1).innerText=minutes;
-row.insertCell(2).innerText=burned+" kcal";
+row.insertCell(2).innerText=intensity+"x";
+row.insertCell(3).innerText=burned+" kcal";
+row.insertCell(4).innerText=now;
 
-const del=row.insertCell(3);
+const del=row.insertCell(5);
 const btn=document.createElement("button");
 btn.innerText="Delete";
 btn.className="delete-btn";
+
 btn.onclick=function(){
 totalBurned-=burned;
-document.getElementById("totalBurned").innerText=totalBurned;
+
+localStorage.setItem("burnedCalories", totalBurned);
+
+updateTotal();
 row.remove();
 };
+
 del.appendChild(btn);
 
 totalBurned+=burned;
-document.getElementById("totalBurned").innerText=totalBurned;
+
+// SAVE to browser storage
+localStorage.setItem("burnedCalories", totalBurned);
+
+updateTotal();
 
 this.reset();
 
 });
+
+function updateTotal(){
+
+document.getElementById("totalBurned").innerText = totalBurned;
+
+document.getElementById("goalText").innerText =
+"Calories Burned: " + totalBurned + " / " + goal + " kcal";
+
+if(goal>0){
+let percent=Math.min((totalBurned/goal)*100,100);
+document.getElementById("progressBar").style.width=percent+"%";
+}else{
+document.getElementById("progressBar").style.width="0%";
+}
+}
+
 function logout(){
-    sessionStorage.removeItem("loggedIn");
-    window.location.href="login.html";
+sessionStorage.removeItem("loggedIn");
+window.location.href="login.html";
 }
 </script>
 
