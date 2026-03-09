@@ -12,10 +12,34 @@ e.preventDefault();
 const user=document.getElementById("username").value;
 const pass=document.getElementById("password").value;
 
-if(user==="admin" && pass==="1234"){
-sessionStorage.setItem("loggedIn","true");
-window.location.href="main.html";  
+const savedUser = localStorage.getItem("userName");
+const savedPass = localStorage.getItem("userPass");
+
+if(user === savedUser && pass === savedPass){
+sessionStorage.setItem("loggedIn", true);
+window.location.href="main.html";
 }else{
 alert("Invalid login");
 }
+});
+
+document.querySelector(".sign-up-container form").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const name = document.querySelector(".sign-up-container input[placeholder='Name']").value;
+const email = document.querySelector(".sign-up-container input[placeholder='Email']").value;
+const pass = document.querySelector(".sign-up-container input[placeholder='Password']").value;
+
+if(!name || !email || !pass){
+alert("Please fill all fields");
+return;
+}
+
+localStorage.setItem("userName",name);
+localStorage.setItem("userEmail",email);
+localStorage.setItem("userPass",pass);
+
+window.location.href="userinfo.html";
+
 });

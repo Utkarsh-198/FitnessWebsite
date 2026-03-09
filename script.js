@@ -2,6 +2,21 @@
 if(sessionStorage.getItem("loggedIn") !== "true"){
     window.location.href = "login.html";
 }
+//logout
+function logout(){
+    sessionStorage.removeItem("loggedIn");
+    window.location.href="login.html";
+}
+
+//welcome name
+document.addEventListener("DOMContentLoaded", function () {
+    const name = localStorage.getItem("userName");
+
+    if (name) {
+        document.getElementById("welcome").innerText = "Welcome " + name;
+    }
+});
+
 
 
 
@@ -122,3 +137,4 @@ function resetSteps(){
     localStorage.setItem("steps",steps);
     updateSteps();
 }
+
